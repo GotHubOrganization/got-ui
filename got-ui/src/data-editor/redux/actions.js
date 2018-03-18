@@ -1,5 +1,5 @@
 import { DATAEDITOR_FETCHDATA, DATAEDITOR_FETCHEDDATA } from './actionTypes';
-import dataService from './entityDataService';
+import dataService from '../services/entityDataService';
 
 export function getEntity (entityId) {
     return (dispatch) => {

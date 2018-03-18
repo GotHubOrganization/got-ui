@@ -2,7 +2,7 @@ import { DATAEDITOR_FETCHDATA, DATAEDITOR_FETCHEDDATA } from './actionTypes';
 
 const initialState = {
     loading: false,
-    data: []
+    data: undefined
 };
 
 export default function (state = initialState, action) {

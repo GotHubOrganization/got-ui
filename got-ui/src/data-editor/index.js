@@ -1,2 +1,2 @@
-export { default as dataEditorReducer } from './reducer';
-export { default as DataEditorComponent } from './dataEditor';
+export { default as dataEditorReducer } from './redux/reducer';
+export { default as DataEditorComponent } from './component';

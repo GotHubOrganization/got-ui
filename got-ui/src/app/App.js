@@ -5,8 +5,10 @@ import { DataEditorComponent } from '../data-editor';
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <DataEditorComponent />
+      <div className="App container-fluid">
+        <div className="container">
+          <DataEditorComponent />
+        </div>
       </div>
     );
   }
