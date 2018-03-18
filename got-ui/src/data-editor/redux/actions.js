@@ -1,11 +1,18 @@
-import { DATAEDITOR_FETCHDATA, DATAEDITOR_FETCHEDDATA } from './actionTypes';
+import { DATAEDITOR_FETCHENTITY,DATAEDITOR_FETCHEDENTITY } from './actionTypes';
 import dataService from '../services/entityDataService';
 
-export function getEntity (entityId) {
+export function getEntityAndLoadData (entityId) {
     return (dispatch) => {
-        dispatch({type: DATAEDITOR_FETCHDATA});
-        dataService.getEntity(entityId).then(data => {
-            dispatch({type: DATAEDITOR_FETCHEDDATA, payload: data});
-        })
+        dispatch({type: DATAEDITOR_FETCHENTITY});
+        dataService.getEntity(entityId).then(entity => {
+            
+            dataService.getEntityData(entityId).then(data => {
+                dispatch({type: DATAEDITOR_FETCHEDENTITY, payload: {
+                    entity: entity,
+                    data: data
+                }});
+            })
+        });
+        
     }
 }

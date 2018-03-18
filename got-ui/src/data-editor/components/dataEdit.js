@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class DataEditorComponent extends Component {
+    static propTypes = {
+        data: PropTypes.object
+    };
 
     render() {
-        const { data } = this.props.dataEditor;
+        const { data } = this.props;
 
         if (data.name) {
             return (
@@ -27,17 +30,18 @@ export default class DataEditorComponent extends Component {
             if (typeof entity.type === 'object') {
                 return (
                     entity.type.properties.map(subProp => {
-                        return <div label={subProp.name}>
+                        return 
+                        <div className="form-group" label={subProp.name}>
                             <label > {subProp.type.name} </label>
-                            <input placeholder='A' />
+                            <input placeholder={subProp.name} />
                         </div>
                     })
                 );
             }
             return (
-                <div label={entity.name}>
+                <div className="form-group" label={entity.name}>
                     <label > {entity.type.name} </label>
-                    <input placeholder='B' />
+                    <input placeholder={entity.name } />
                 </div>
             )
         });

@@ -13,7 +13,9 @@ class DataService {
     }
 
     getEntityData = (type) => {
-        return [];
+        return new Promise((resolve,reject) => {
+            resolve([]);
+        })
     }
 
     // Saves Data as Batch
