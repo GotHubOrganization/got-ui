@@ -9,7 +9,7 @@ export default class DataListComponent extends Component {
     render() {
         return (
             <div className="table-responsive">
-                <table class="table table-striped table-sm">
+                <table className="table table-striped table-sm">
                     <thead>
                         <tr>
                             <th>#</th>

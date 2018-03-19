@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import entityDataService from './services/entityDataService';
 import { getEntityAndLoadData } from './redux/actions';
 import EntityHeaderBar from './components/entityHeader';
@@ -10,7 +11,6 @@ class DataEditor extends Component {
     constructor(props) {
         super(props);
         this.onHeaderClick = this.onHeaderClick.bind(this);
-        this.toggleDataEdit = this.toggleDataEdit.bind(this);
         this.state = {
             showDataEdit: false
         };
@@ -20,10 +20,6 @@ class DataEditor extends Component {
         this.props.getEntityAndLoadData('1');
     }
 
-    toggleDataEdit() {
-        this.setState({ showDataEdit: true })
-    }
-
     render() {
         const { entity, data } = this.props.dataEditor;
         return (
@@ -31,19 +27,17 @@ class DataEditor extends Component {
                 <div className="column" >
                     <EntityHeaderBar onEntitiySelect={this.onHeaderClick} />
                 </div>
+                <br />
                 <div className="row">
                     {data && (
                         <React.Fragment>
                             <EntityDataList data={data} />
-                            <button onClick={ this.toggleDataEdit} type="button" className="btn btn-primary">+</button>
+                            <Link to='/dataeditor/new'>
+                                <button type="button" className="btn btn-primary">+</button>
+                            </Link>
                         </React.Fragment>
                     )
                     }
-                </div>
-                <div className="row">
-                    {this.state.showDataEdit && (
-                        <DataEditComponent data={entity} />
-                    )}
                 </div>
             </React.Fragment>
         );

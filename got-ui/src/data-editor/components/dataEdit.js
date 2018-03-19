@@ -1,40 +1,34 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-export default class DataEditorComponent extends Component {
+class DataEditorComponent extends Component {
     static propTypes = {
         data: PropTypes.object
     };
 
     render() {
-        const { data } = this.props;
-
-        if (data.name) {
+        const { entity } = this.props.dataEditor;
+        
+        if (entity.name) {
             return (
                 <form>
-                    {this.mapFormFields(data)}
+                    {this.mapFormFields(entity)}
                 </form>
             );
         }
-       /* <form>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
-            </div>
-        </form> */
     }
-
     
     mapFormFields = (entities) => {
         return entities.properties.map(entity => {
             if (typeof entity.type === 'object') {
                 return (
                     entity.type.properties.map(subProp => {
-                        return 
+                        return (
                         <div className="form-group" label={subProp.name}>
-                            <label > {subProp.type.name} </label>
+                            <label > {subProp.name} </label>
                             <input placeholder={subProp.name} />
-                        </div>
+                        </div>);
                     })
                 );
             }
@@ -46,5 +40,12 @@ export default class DataEditorComponent extends Component {
             )
         });
     }
-
 }
+
+function mapStateToProps(props) {
+    return {
+        dataEditor: props.dataEditor
+    }
+}
+
+export default connect(mapStateToProps)(DataEditorComponent);
