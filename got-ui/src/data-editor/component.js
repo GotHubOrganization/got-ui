@@ -6,6 +6,7 @@ import { getEntityAndLoadData } from './redux/actions';
 import EntityHeaderBar from './components/entityHeader';
 import EntityDataList from './components/dataList';
 import DataEditComponent from './components/dataEdit';
+import { Button } from 'semantic-ui-react';
 
 class DataEditor extends Component {
     constructor(props) {
@@ -32,9 +33,9 @@ class DataEditor extends Component {
                     {data && (
                         <React.Fragment>
                             <EntityDataList data={data} />
-                            <Link to='/dataeditor/new'>
-                                <button type="button" className="btn btn-primary">+</button>
-                            </Link>
+                                <Button as={Link} to='/dataeditor/new'>
+                                    +
+                                </Button>
                         </React.Fragment>
                     )
                     }

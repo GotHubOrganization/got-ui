@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Input, Button, Checkbox, Form, Label } from 'semantic-ui-react'
 
 class DataEditorComponent extends Component {
     static propTypes = {
@@ -9,37 +11,59 @@ class DataEditorComponent extends Component {
 
     render() {
         const { entity } = this.props.dataEditor;
-        
-        if (entity.name) {
+
+        if (entity) {
             return (
-                <form>
+                <Form>
                     {this.mapFormFields(entity)}
-                </form>
+                    {this.renderBackButton()}
+                </Form>
+                
             );
         }
+        return (
+            this.renderBackButton()
+        );
     }
-    
+
     mapFormFields = (entities) => {
         return entities.properties.map(entity => {
             if (typeof entity.type === 'object') {
                 return (
-                    entity.type.properties.map(subProp => {
-                        return (
-                        <div className="form-group" label={subProp.name}>
-                            <label > {subProp.name} </label>
-                            <input placeholder={subProp.name} />
-                        </div>);
-                    })
+                    <React.Fragment>
+                        <Label color="blue">{entity.name}</Label>
+
+                        {
+                            entity.type.properties.map(subProp => {
+                                return (
+                                    <Form.Field>
+                                        <Label> {subProp.name} </Label>
+                                        <Input placeholder={subProp.name} />
+                                    </Form.Field>
+                                )
+                            })
+                        }
+
+                    </React.Fragment>
+
                 );
             }
             return (
-                <div className="form-group" label={entity.name}>
-                    <label > {entity.type.name} </label>
-                    <input placeholder={entity.name } />
-                </div>
+                <Form.Field>
+                    <Label> {entity.name} </Label>
+                    <Input placeholder={entity.name} />
+                </Form.Field>
             )
         });
     }
+    renderBackButton() {
+        return (
+            <Button as={Link} to="/dataeditor" primary>
+                Back
+            </Button>
+        )
+    }
+
 }
 
 function mapStateToProps(props) {
