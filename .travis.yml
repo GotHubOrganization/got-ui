@@ -4,8 +4,10 @@ node_js:
 cache:
   directories:
   - node_modules
-script:
+install:
   - yarn
+  - pip install --user awscli
+script:
   - yarn build
 deploy:
   provider: script
