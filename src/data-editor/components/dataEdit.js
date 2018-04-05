@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Input, Button, Checkbox, Form, Label } from 'semantic-ui-react';
+import { Input, Button, Form, Label } from 'semantic-ui-react';
 
 class DataEditorComponent extends Component {
     static propTypes = {
@@ -40,7 +40,7 @@ class DataEditorComponent extends Component {
                                         <Label> {subProp.name} </Label>
                                         <Input placeholder={subProp.name} />
                                     </Form.Field>
-                                )
+                                );
                             })
                         }
 
@@ -53,7 +53,7 @@ class DataEditorComponent extends Component {
                     <Label> {entity.name} </Label>
                     <Input placeholder={entity.name} />
                 </Form.Field>
-            )
+            );
         });
     }
     renderBackButton() {
@@ -61,7 +61,7 @@ class DataEditorComponent extends Component {
             <Button as={Link} to="/dataeditor" primary>
                 Back
             </Button>
-        )
+        );
     }
 
 }
@@ -69,7 +69,7 @@ class DataEditorComponent extends Component {
 function mapStateToProps(props) {
     return {
         dataEditor: props.dataEditor
-    }
+    };
 }
 
 export default connect(mapStateToProps)(DataEditorComponent);
