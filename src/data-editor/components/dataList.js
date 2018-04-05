@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Icon, Label, Menu, Table } from 'semantic-ui-react'
+import { Icon, Label, Menu, Table } from 'semantic-ui-react';
 
 export default class DataListComponent extends Component {
     static propTypes = {

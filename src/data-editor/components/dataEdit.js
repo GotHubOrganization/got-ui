@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Input, Button, Checkbox, Form, Label } from 'semantic-ui-react'
+import { Input, Button, Checkbox, Form, Label } from 'semantic-ui-react';
 
 class DataEditorComponent extends Component {
     static propTypes = {

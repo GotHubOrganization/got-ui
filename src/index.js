@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import { store } from './store';
-import { BrowserRouter, Switch, Link } from 'react-router-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
 import appRoutes from './routes';
 
 ReactDOM.render(

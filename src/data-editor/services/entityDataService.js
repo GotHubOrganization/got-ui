@@ -9,27 +9,27 @@ class DataService {
     getEntity = (type) => {
         return new Promise((resolve,reject) => {
             resolve(data);
-        })
-    }
+        });
+    };
 
     getEntityData = (type) => {
         return new Promise((resolve,reject) => {
             resolve([]);
-        })
-    }
+        });
+    };
 
     // Saves Data as Batch
     saveData = (data) => {
         return new Promise((resolve,reject) => {
             resolve(true);
-        })
-    }
+        });
+    };
 
     getAllEntites = () => {
         return new Promise((resolve,reject) => {
             resolve([]);
-        })
-    }
-};
+        });
+    };
+}
 
 export default new DataService();

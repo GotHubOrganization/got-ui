@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Menu } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react';
 
 export default class EntityHeaderComponent extends Component {
     static propTypes = {
@@ -11,11 +11,11 @@ export default class EntityHeaderComponent extends Component {
     constructor(props) {
         super(props);
         this.onItemClick = this.onItemClick.bind(this);
-        this.state = { activeItem: undefined }
+        this.state = { activeItem: undefined };
     }
 
     render() {
-        const { activeItem } = this.state
+        const { activeItem } = this.state;
         let { entities } = this.props;
         if (entities) {
             //TODO: read from entities and show in header , add link to id from entity and reroute to entitylist
@@ -29,12 +29,12 @@ export default class EntityHeaderComponent extends Component {
                         key="1">
                         Person
                     </Menu.Item>
-                </Menu>)
+                </Menu>);
         }
     }
 
     onItemClick(item) {
-        this.setState({ activeItem: item.name })
+        this.setState({ activeItem: item.name });
         this.props.onEntitiySelect(item.key);
     }
 }
