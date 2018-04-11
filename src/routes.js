@@ -1,5 +1,7 @@
-import { DataEditorRoutes} from './data-editor';
+import { DataEditorRoutes } from './data-editor';
+import { objectRoutes } from './object/routes';
 
 export default [
-    DataEditorRoutes
+    DataEditorRoutes,
+    objectRoutes
 ];
