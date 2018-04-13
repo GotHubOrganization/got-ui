@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - "stable"
+cache:
+  directories:
+  - node_modules
+install:
+  - yarn
+  - pip install --user awscli
+script:
+  - yarn build
+deploy:
+  provider: script
+  script: bash ci/deploy.sh
+  skip_cleanup: true
+  on:
+    branch: "develop"

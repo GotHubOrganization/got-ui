@@ -11,8 +11,7 @@ export function getEntityAndLoadData (entityId) {
                     entity: entity,
                     data: data
                 }});
-            })
-        });
-        
-    }
+            });
+        });  
+    };
 }

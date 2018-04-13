@@ -8,11 +8,11 @@ const initialState = {
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case DATAEDITOR_FETCHENTITY:
-            return Object.assign({}, state, { loading: true });
-        case DATAEDITOR_FETCHEDENTITY:
-            return Object.assign({}, state, { loading: false, entity: action.payload.entity, data: action.payload.data });
-        default:
-            return state;
+    case DATAEDITOR_FETCHENTITY:
+        return Object.assign({}, state, { loading: true });
+    case DATAEDITOR_FETCHEDENTITY:
+        return Object.assign({}, state, { loading: false, entity: action.payload.entity, data: action.payload.data });
+    default:
+        return state;
     }
 }

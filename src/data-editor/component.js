@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import entityDataService from './services/entityDataService';
 import { getEntityAndLoadData } from './redux/actions';
 import EntityHeaderBar from './components/entityHeader';
 import EntityDataList from './components/dataList';
-import DataEditComponent from './components/dataEdit';
 import { Button } from 'semantic-ui-react';
 
 class DataEditor extends Component {
@@ -17,12 +15,12 @@ class DataEditor extends Component {
         };
     }
 
-    onHeaderClick(key) {
+    onHeaderClick() {
         this.props.getEntityAndLoadData('1');
     }
 
     render() {
-        const { entity, data } = this.props.dataEditor;
+        const { data } = this.props.dataEditor;
         return (
             <React.Fragment>
                 <div className="column" >
@@ -33,9 +31,9 @@ class DataEditor extends Component {
                     {data && (
                         <React.Fragment>
                             <EntityDataList data={data} />
-                                <Button as={Link} to='/dataeditor/new'>
+                            <Button as={Link} to='/dataeditor/new'>
                                     +
-                                </Button>
+                            </Button>
                         </React.Fragment>
                     )
                     }
@@ -48,7 +46,7 @@ class DataEditor extends Component {
 function mapStateToProps(props) {
     return {
         dataEditor: props.dataEditor
-    }
+    };
 }
 
 export default connect(mapStateToProps, { getEntityAndLoadData })(DataEditor);
