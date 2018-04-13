@@ -1,4 +1,4 @@
-import * as axios from 'axios';
+import axios from 'axios';
 const API_ENDPOINT = 'https://api.gothub.io/types/type/';
 // const API_ENDPOINT = 'http://localhost:8080/types/type/';
 
