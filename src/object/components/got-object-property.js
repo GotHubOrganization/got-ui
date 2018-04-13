@@ -5,10 +5,6 @@ import { GotObject } from './got-object';
 import { gotTypeServiceHoc } from '../../type/components/got-type-service.hoc';
 
 export class GotObjectProperty extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const property = this.props.property;
         const type = property.type;
@@ -16,7 +12,9 @@ export class GotObjectProperty extends Component {
             return <Text label={property.name} />;
         } else {
             const GotObjectTyped = gotTypeServiceHoc(GotObject);
-            return <GotObjectTyped typeName={type} />;
+            return <GotObjectTyped
+                typeName={type} 
+                level={this.props.level + 1} />;
         }
     }
 }

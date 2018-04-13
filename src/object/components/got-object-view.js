@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { GotObject } from './got-object';
 import { gotTypeServiceHoc } from '../../type/components/got-type-service.hoc';
+import FixedMenuLayout from '../../layout/fixed-menu-layout';
 
 export class GotObjectView extends Component {
 
@@ -12,6 +13,11 @@ export class GotObjectView extends Component {
     render() {
         const typeName = this.props.match.params.type;
         const GotObjectTyped = gotTypeServiceHoc(GotObject);
-        return <GotObjectTyped typeName={typeName} />;
+
+        return (
+            <FixedMenuLayout>
+                <GotObjectTyped typeName={typeName} />
+            </FixedMenuLayout>
+        );
     }
 }

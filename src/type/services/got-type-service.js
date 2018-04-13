@@ -1,6 +1,6 @@
 import * as axios from 'axios';
-// const API_ENDPOINT = 'https://api.gothub.io/types/type/';
-const API_ENDPOINT = 'http://localhost:8080/types/type/';
+const API_ENDPOINT = 'https://api.gothub.io/types/type/';
+// const API_ENDPOINT = 'http://localhost:8080/types/type/';
 
 export class GotTypeService {
 
@@ -10,6 +10,7 @@ export class GotTypeService {
         if (!GotTypeService.instance) {
             GotTypeService.instance = new GotTypeService();
         }
+        // return new GotTypeService();
         return GotTypeService.instance;
     }
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Form } from 'semantic-ui-react';
 
 export class Text extends Component {
     constructor(props) {
@@ -11,10 +12,10 @@ export class Text extends Component {
 
     render() {
         return (
-            <div className="form-group">
-                <label>{this.props.label}:</label>
-                <input type="text" className="form-control" value={this.props.value} />
-            </div>
+            <Form.Field>
+                <label>{this.props.label}</label>
+                <input />
+            </Form.Field>
         );
     }
 }
