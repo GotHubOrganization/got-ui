@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Divider, Dropdown, Grid, Header, Image, List, Menu, Segment } from 'semantic-ui-react';
 
-const FixedMenuLayout = (props) => (
+export const FixedMenuLayout = (props) => (
     <div>
         <Menu fixed='top' inverted>
             <Container>
@@ -93,5 +93,3 @@ const FixedMenuLayout = (props) => (
         </Segment>
     </div>
 );
-
-export default FixedMenuLayout;

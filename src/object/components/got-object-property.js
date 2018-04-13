@@ -1,20 +1,27 @@
 import React, { Component } from 'react';
-import { Text } from '../../view-components/text';
-import { isPrimitive } from '../../type/helpers/type-helper';
+import { Text } from '../../leafs';
+import { isPrimitive } from '../../type';
 import { GotObject } from './got-object';
-import { gotTypeServiceHoc } from '../../type/components/got-type-service.hoc';
+import { gotTypeServiceHoc } from '../../type';
 
+/**
+ * This component renders a single property based on the GotPropertyDto. Primitive properties
+ * are currently just rendered with a Text component while complex typed propterties will 
+ * again render a new GotObject component which is attached to a GotTypeService by itself
+ * (GotObjectTyped).
+ */
 export class GotObjectProperty extends Component {
     render() {
         const property = this.props.property;
         const type = property.type;
+        const level = this.props.level || 1;
         if (isPrimitive(type)) {
             return <Text label={property.name} />;
         } else {
             const GotObjectTyped = gotTypeServiceHoc(GotObject);
             return <GotObjectTyped
                 typeName={type} 
-                level={this.props.level + 1} />;
+                level={level + 1} />;
         }
     }
 }
