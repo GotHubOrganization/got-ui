@@ -12,12 +12,14 @@ export const gotTypeServiceHoc = (WrappedComponent) => {
 
         constructor(props) {
             super(props);
-            this.state = { type: {} };
+            this.state = { type: null, error: null };
         }
 
         componentDidMount() {
             this.gotTypeService.get(this.props.typeName).then((type) => {
-                this.setState({ type });
+                this.setState({ type, error: null});
+            }).catch((error) => {
+                this.setState({ type: null, error});
             });
         }
 

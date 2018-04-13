@@ -34,18 +34,23 @@ export class GotTypeService {
      */
     get(typeName) {
         const self = this;
-        if (self.types[typeName]) {
-            return Promise.resolve(self.types[typeName]);
-        }
-        else {
-            return axios.get(API_ENDPOINT + typeName)
-                .then(function (response) {
-                    self.types = response.data;
-                    return self.types[typeName];
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        }
+
+        return new Promise((resolve, reject) => {
+
+            if (self.types[typeName]) {
+                resolve(self.types[typeName]);
+            }
+            else {
+                return axios.get(API_ENDPOINT + typeName)
+                    .then(function (response) {
+                        self.types = response.data;
+                        resolve(self.types[typeName]);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                        reject(error);
+                    });
+            }
+        });
     }
 }

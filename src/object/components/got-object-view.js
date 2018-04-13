@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { GotObject } from './got-object';
-import { gotTypeServiceHoc } from '../../type';
 import { FixedMenuLayout } from '../../layout';
+import { GotObjectTyped } from './got-object';
 
 /**
  * Main view for creating and editing objects based on a given type. The type is injected
@@ -17,7 +16,6 @@ export class GotObjectView extends Component {
 
     render() {
         const typeName = this.props.match.params.type;
-        const GotObjectTyped = gotTypeServiceHoc(GotObject);
 
         return (
             <FixedMenuLayout>
