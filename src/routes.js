@@ -1,3 +1,3 @@
-import { objectRoutes } from './object/routes';
+import { objectRoutes } from './object';
 
 export default [objectRoutes];

@@ -1,26 +1,40 @@
 import React, { Component } from 'react';
-import { FixedMenuLayout } from '../../layout';
-import { GotObjectTyped } from './got-object';
+import { GotObject } from './got-object';
+import { connect } from 'react-redux';
+import { fetchObject } from '../redux/actions';
 
 /**
  * Main view for creating and editing objects based on a given type. The type is injected
  * via a route param (e.g. /object/:type). This component also attaches a GotTypeService
  * to the GotObject (GotObjectTyped) component to enable API access on object level.
  */
-export class GotObjectView extends Component {
+class GotObjectView extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { type: {} };
+    }
+
+    componentWillMount() {
+        const typeName = this.props.match.params.type;
+        this.props.fetchObject(typeName);
     }
 
     render() {
         const typeName = this.props.match.params.type;
-
-        return (
-            <FixedMenuLayout>
-                <GotObjectTyped typeName={typeName} />
-            </FixedMenuLayout>
-        );
+        if (this.props.gotObject.dataType) {
+            return (
+                <GotObject typeName={typeName} typeObject={this.props.gotObject.dataType} />
+            );
+        } else {
+            return null;
+        }
     }
 }
+
+function mapStateToProps(props) {
+    return {
+        gotObject: props.gotObject
+    }
+}
+
+export default connect(mapStateToProps, { fetchObject })(GotObjectView);

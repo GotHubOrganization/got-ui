@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { GotObjectProperty } from './got-object-property';
 import { Header, Container, Form, Message } from 'semantic-ui-react';
-import { gotTypeServiceHoc } from '../../type';
 
 /**
  * Represents a create and edit form for an instance of a got type. It will render the
@@ -32,10 +31,13 @@ export class GotObject extends Component {
     }
 
     render() {
-        const typeName = this.props.typeName;
-        const type = this.props.type || {};
-        const loading = type.properties ? false : true;
-        type.properties = type.properties || [];
+        const { typeObject, typeName } = this.props;
+        if (!typeObject) {
+            return null;
+        }
+        const type = typeObject || {};
+        const loading = typeObject.properties ? false : true;
+        type.properties = typeObject.properties || [];
 
         if (this.props.error) {
             const error = this.props.error;
@@ -43,7 +45,7 @@ export class GotObject extends Component {
                 <Message
                     error
                     header={error.message}
-                    content={error.stack}/>
+                    content={error.stack} />
             );
         } else {
             return (
@@ -57,5 +59,3 @@ export class GotObject extends Component {
         }
     }
 }
-
-export const GotObjectTyped = gotTypeServiceHoc(GotObject);

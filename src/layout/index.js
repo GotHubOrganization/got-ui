@@ -1,1 +1,2 @@
-export { FixedMenuLayout } from './fixed-menu-layout';
+export { FooterComponent } from './footer';
+export { HeaderComponent } from './header';
