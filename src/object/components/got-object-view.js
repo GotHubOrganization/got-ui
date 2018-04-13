@@ -9,11 +9,6 @@ import { fetchObject } from '../redux/actions';
  * to the GotObject (GotObjectTyped) component to enable API access on object level.
  */
 class GotObjectView extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
     componentWillMount() {
         const typeName = this.props.match.params.type;
         this.props.fetchObject(typeName);
