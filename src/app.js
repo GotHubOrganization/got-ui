@@ -9,13 +9,17 @@ export default class App extends Component {
     render() {
         return (
             <Provider store={store}>
-                <React.Fragment>
-                   
+                <div>
+                    <div>
+                        <HeaderComponent />
+                    </div>
                     <BrowserRouter>
                         <Switch children={appRoutes} />
                     </BrowserRouter>
-                    
-                </React.Fragment>
+                    <div>
+                        <FooterComponent />
+                    </div>
+                </div>
             </Provider>
 
         );

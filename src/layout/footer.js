@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Divider, Dropdown, Grid, Header, Image, List, Menu, Segment } from 'semantic-ui-react';
+import { Container, Divider, Grid, Header, Image, List, Segment } from 'semantic-ui-react';
 
 export const FooterComponent = (props) => (
     <Segment
