@@ -29,7 +29,7 @@ class GotObjectView extends Component {
 function mapStateToProps(props) {
     return {
         gotObject: props.gotObject
-    }
+    };
 }
 
 export default connect(mapStateToProps, { fetchObject })(GotObjectView);

@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import { ObjectReducer } from './object'
+import { ObjectReducer } from './object';
 
 const rootReducer = combineReducers({
     gotObject : ObjectReducer
