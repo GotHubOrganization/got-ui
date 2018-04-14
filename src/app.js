@@ -4,6 +4,7 @@ import { BrowserRouter, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import appRoutes from './routes';
+import { GotObject } from './object/components/got-object';
 
 export default class App extends Component {
     render() {
