@@ -25,7 +25,7 @@ class GotObject extends Component {
             return <GotObjectProperty
                 key={type.name + '_' + property.name}
                 property={property}
-                level={this.level} />
+                level={this.level} />;
         });
     }
 
