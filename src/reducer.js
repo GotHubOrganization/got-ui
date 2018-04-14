@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import { ObjectReducer } from './object';
 
 const rootReducer = combineReducers({

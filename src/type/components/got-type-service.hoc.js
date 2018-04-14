@@ -17,9 +17,9 @@ export const gotTypeServiceHoc = (WrappedComponent) => {
 
         componentDidMount() {
             this.gotTypeService.get(this.props.typeName).then((type) => {
-                this.setState({ type, error: null});
+                this.setState({ type, error: null });
             }).catch((error) => {
-                this.setState({ type: null, error});
+                this.setState({ type: null, error });
             });
         }
 
