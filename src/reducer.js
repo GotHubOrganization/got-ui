@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { ObjectReducer } from './object';
+import { TypeReducer } from './type';
 
 const rootReducer = combineReducers({
-    gotObject : ObjectReducer
+    type: TypeReducer
 });
 
 export default rootReducer;

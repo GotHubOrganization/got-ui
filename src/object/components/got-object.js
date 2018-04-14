@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { GotObjectProperty } from './got-object-property';
 import { Header, Container, Form, Message } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { fetchType } from '../../type';
 
 /**
  * Represents a create and edit form for an instance of a got type. It will render the
  * view automatically based on the properties of its type declaration.
  */
-export class GotObject extends Component {
+class GotObject extends Component {
+
     /**
      * The hierachy level of the object within the loaded object tree. Mainly used for
      * layout purposes.
@@ -30,14 +33,15 @@ export class GotObject extends Component {
         return result;
     }
 
+    componentWillMount(){
+        this.props.fetchType(this.props.typeName);
+    }
+
     render() {
-        const { typeObject, typeName } = this.props;
-        if (!typeObject) {
-            return null;
-        }
-        const type = typeObject || {};
-        const loading = typeObject.properties ? false : true;
-        type.properties = typeObject.properties || [];
+        const { typeName } = this.props;
+        const type = this.props.type || {};
+        const loading = type.name ? false : true;
+        type.properties = type.properties || [];
 
         if (this.props.error) {
             const error = this.props.error;
@@ -59,3 +63,11 @@ export class GotObject extends Component {
         }
     }
 }
+
+function mapStateToProps(state, props) {
+    return {
+        type: state.type.types[props.typeName]
+    };
+}
+
+export default connect(mapStateToProps, { fetchType })(GotObject);

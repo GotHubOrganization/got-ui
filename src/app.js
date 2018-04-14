@@ -4,6 +4,7 @@ import { BrowserRouter, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import appRoutes from './routes';
+import { Container } from 'semantic-ui-react';
 
 export default class App extends Component {
     render() {
@@ -11,9 +12,11 @@ export default class App extends Component {
             <Provider store={store}>
                 <React.Fragment>
                     <HeaderComponent />
-                    <BrowserRouter>
-                        <Switch children={appRoutes} />
-                    </BrowserRouter>
+                    <Container style={{ marginTop: '5em' }}>
+                        <BrowserRouter >
+                            <Switch children={appRoutes} />
+                        </BrowserRouter>
+                    </Container>
                     <FooterComponent />
                 </React.Fragment>
             </Provider>
