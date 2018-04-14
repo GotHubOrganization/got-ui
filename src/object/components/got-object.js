@@ -21,19 +21,15 @@ class GotObject extends Component {
      * @param {Object} type GotTypeDto which containes all properties to be rendered.
      */
     renderProperties(type) {
-        let result = [];
-        for (const property of type.properties) {
-            result.push(
-                <GotObjectProperty
-                    key={type.name + '_' + property.name}
-                    property={property}
-                    level={this.level} />
-            );
-        }
-        return result;
+        return type.properties.map(property => {
+            return <GotObjectProperty
+                key={type.name + '_' + property.name}
+                property={property}
+                level={this.level} />
+        });
     }
 
-    componentWillMount(){
+    componentWillMount() {
         this.props.fetchType(this.props.typeName);
     }
 
