@@ -1,2 +1,0 @@
-export const FETCH_OBJECT = 'OBJECT.FECTH_OBJECT';
-export const FETCH_ERROR = 'OBJECT.FETCH_ERROR';
