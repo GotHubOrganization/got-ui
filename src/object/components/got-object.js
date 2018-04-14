@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { GotObjectProperty } from './got-object-property';
 import { Header, Container, Form, Message } from 'semantic-ui-react';
-import { gotTypeServiceHoc } from '../../type';
+import { connect } from 'react-redux';
+import { fetchType } from '../../type';
 
 /**
  * Represents a create and edit form for an instance of a got type. It will render the
  * view automatically based on the properties of its type declaration.
  */
-export class GotObject extends Component {
+class GotObject extends Component {
+
     /**
      * The hierachy level of the object within the loaded object tree. Mainly used for
      * layout purposes.
@@ -19,22 +21,22 @@ export class GotObject extends Component {
      * @param {Object} type GotTypeDto which containes all properties to be rendered.
      */
     renderProperties(type) {
-        let result = [];
-        for (const property of type.properties) {
-            result.push(
-                <GotObjectProperty
-                    key={type.name + '_' + property.name}
-                    property={property}
-                    level={this.level} />
-            );
-        }
-        return result;
+        return type.properties.map(property => {
+            return <GotObjectProperty
+                key={type.name + '_' + property.name}
+                property={property}
+                level={this.level} />;
+        });
+    }
+
+    componentWillMount() {
+        this.props.fetchType(this.props.typeName);
     }
 
     render() {
-        const typeName = this.props.typeName;
+        const { typeName } = this.props;
         const type = this.props.type || {};
-        const loading = type.properties ? false : true;
+        const loading = type.name ? false : true;
         type.properties = type.properties || [];
 
         if (this.props.error) {
@@ -43,7 +45,7 @@ export class GotObject extends Component {
                 <Message
                     error
                     header={error.message}
-                    content={error.stack}/>
+                    content={error.stack} />
             );
         } else {
             return (
@@ -58,4 +60,10 @@ export class GotObject extends Component {
     }
 }
 
-export const GotObjectTyped = gotTypeServiceHoc(GotObject);
+function mapStateToProps(state, props) {
+    return {
+        type: state.type.types[props.typeName]
+    };
+}
+
+export default connect(mapStateToProps, { fetchType })(GotObject);

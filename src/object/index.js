@@ -1,0 +1,1 @@
+export { objectRoutes } from './routes';

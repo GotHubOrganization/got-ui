@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text } from '../../leafs';
 import { isPrimitive } from '../../type';
-import { GotObjectTyped } from './got-object';
+import GotObject from './got-object';
 
 /**
  * This component renders a single property based on the GotPropertyDto. Primitive properties
@@ -17,7 +17,7 @@ export class GotObjectProperty extends Component {
         if (isPrimitive(type)) {
             return <Text label={property.name} />;
         } else {
-            return <GotObjectTyped typeName={type} level={level + 1} />;
+            return <GotObject typeName={type} level={level + 1} />;
         }
     }
 }
