@@ -20,7 +20,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "export CI=False && react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "eslint src/**",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
