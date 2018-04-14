@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Divider, Grid, Header, Image, List, Segment } from 'semantic-ui-react';
 
-export const FooterComponent = (props) => (
+export const FooterComponent = () => (
     <Segment
         inverted
         vertical
@@ -55,4 +55,5 @@ export const FooterComponent = (props) => (
                 <List.Item as='a' href='#'>Privacy Policy</List.Item>
             </List>
         </Container>
-    </Segment>)
+    </Segment>
+);
