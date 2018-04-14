@@ -8,6 +8,7 @@ install:
   - yarn
   - pip install --user awscli
 script:
+  - yarn test
   - yarn build
 deploy:
   provider: script
