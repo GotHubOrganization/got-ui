@@ -8,14 +8,9 @@ const API_ENDPOINT = 'https://api.gothub.io/types/type/';
 export class GotTypeService {
 
     /**
-     * Instance of the singleton.
-     */
-    static instance;
-
-    /**
      * Provide an instance of this service
      */
-    static getInstance() {
+    public static getInstance(): GotTypeService {
         if (!GotTypeService.instance) {
             GotTypeService.instance = new GotTypeService();
         }
@@ -24,15 +19,20 @@ export class GotTypeService {
     }
 
     /**
+     * Instance of the singleton.
+     */
+    private static instance: GotTypeService;
+
+    /**
      * Cached types which allow faster loading when lazy loading is disabled.
      */
-    types = {};
+    public types = {};
 
     /**
      * Gets a type declaration from the API by type name
      * @param {String} typeName 
      */
-    get(typeName) {
+    public get(typeName: string): Promise<any> {
         const self = this;
 
         return new Promise((resolve, reject) => {
@@ -41,12 +41,12 @@ export class GotTypeService {
                 resolve(self.types[typeName]);
             }
             else {
-                return axios.get(API_ENDPOINT + typeName)
-                    .then(function (response) {
+                axios.get(API_ENDPOINT + typeName)
+                    .then((response: any) => {
                         self.types = response.data;
                         resolve(self.types[typeName]);
                     })
-                    .catch(function (error) {
+                    .catch((error: Error) => {
                         console.log(error);
                         reject(error);
                     });

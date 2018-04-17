@@ -1,7 +1,15 @@
-import React, { Component } from 'react';
+import * as React from 'react';
+import { Component } from 'react';
 import { Text } from '../../leafs';
-import { isPrimitive } from '../../type';
+import { GotPropertyDto, isPrimitive } from '../../type';
 import GotObject from './got-object';
+
+namespace GotObjectProperty {
+    export interface Props {
+        property: GotPropertyDto;
+        level: number;
+    }
+}
 
 /**
  * This component renders a single property based on the GotPropertyDto. Primitive properties
@@ -9,8 +17,8 @@ import GotObject from './got-object';
  * again render a new GotObject component which is attached to a GotTypeService by itself
  * (GotObjectTyped).
  */
-export class GotObjectProperty extends Component {
-    render() {
+export class GotObjectProperty extends Component<GotObjectProperty.Props> {
+    public render() {
         const property = this.props.property;
         const type = property.type;
         const level = this.props.level || 1;

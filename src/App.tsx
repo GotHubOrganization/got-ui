@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { FooterComponent, HeaderComponent } from './layout';
-import { BrowserRouter, Switch } from 'react-router-dom';
+import * as React from 'react';
 import { Provider } from 'react-redux';
-import { store } from './store';
-import appRoutes from './routes';
+import { BrowserRouter, Switch } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
+import { FooterComponent, HeaderComponent } from './layout';
+import { appRoutes } from './routes';
+import { store } from './store';
 
-export default class App extends Component {
-    render() {
+class App extends React.Component {
+    public render() {
         return (
             <Provider store={store}>
                 <React.Fragment>
@@ -23,3 +23,5 @@ export default class App extends Component {
         );
     }
 }
+
+export default App;
