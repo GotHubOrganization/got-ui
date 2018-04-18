@@ -1,5 +1,5 @@
 import { Text } from 'app/leafs';
-import { GotTypePropertyDto, isPrimitive } from 'app/type';
+import { GotTypePropertyDto, isPrimitive, Map } from 'app/type';
 import * as React from 'react';
 import { Component } from 'react';
 import GotObject from './GotObject';
@@ -14,6 +14,8 @@ interface Props {
      * Represents the level in the component tree for rendering purposes.
      */
     level: number;
+
+    onChange?: (propVal: Map<any>) => void;
 }
 
 /**
@@ -23,14 +25,28 @@ interface Props {
  * (GotObjectTyped).
  */
 export class GotObjectProperty extends Component<Props> {
+    constructor(props: Props) {
+        super(props);
+        this.onChange = this.onChange.bind(this);
+    }
+
+    public onChange(value: any) {
+        if (this.props.onChange) {
+            const propVal: Map<any> = {
+                [this.props.property.name]: value
+            }
+            this.props.onChange(propVal);
+        }
+    }
+
     public render() {
         const property = this.props.property;
         const type = property.type;
         const level = this.props.level || 1;
         if (isPrimitive(type)) {
-            return <Text label={property.name} />;
+            return <Text label={property.name} onChange={this.onChange} />;
         } else {
-            return <GotObject typeName={type} level={level + 1} />;
+            return <GotObject typeName={type} level={level + 1} onChange={this.onChange} />;
         }
     }
 }

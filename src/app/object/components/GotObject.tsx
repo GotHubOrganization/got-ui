@@ -1,5 +1,5 @@
 import { State as RootState } from 'app/redux/state';
-import { fetchType, GotTypeDto, GotTypePropertyDto } from 'app/type';
+import { fetchType, GotTypeDto, GotTypePropertyDto, Map } from 'app/type';
 import * as React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
@@ -40,23 +40,50 @@ interface PartialProps {
      * to the user or generally influence the rendering of the component.
      */
     error?: Error;
+
+    onChange?: (value: any) => void;
 }
 
 interface Props extends PartialProps {
     typeName: string;
 }
 
+interface State {
+    object: any;
+}
+
 /**
  * Represents a create and edit form for an instance of a got type. It will render the
  * view automatically based on the properties of its type declaration.
  */
-class GotObject extends Component<Props & ReduxProps> {
+class GotObject extends Component<Props & ReduxProps, State> {
 
     /**
      * The hierachy level of the object within the loaded object tree. Mainly used for
      * layout purposes.
      */
     public level: number = this.props.level || 1;
+
+    constructor(props: Props & ReduxProps) {
+        super(props);
+        this.state = {
+            object: {}
+        };
+        this.onChange = this.onChange.bind(this);
+    }
+
+    public onChange(propVal: Map<any>) {
+        const newState: State = {
+            object: {
+                ...this.state.object,
+                ...propVal
+            }
+        }
+        if (this.props.onChange) {
+            this.props.onChange(newState.object);
+        }
+        this.setState(newState);
+    }
 
     /**
      * Renders all properties of the given type declaration.
@@ -67,7 +94,8 @@ class GotObject extends Component<Props & ReduxProps> {
             return <GotObjectProperty
                 key={type.name + '_' + property.name}
                 property={property}
-                level={this.level} />;
+                level={this.level}
+                onChange={this.onChange} />;
         });
     }
 
