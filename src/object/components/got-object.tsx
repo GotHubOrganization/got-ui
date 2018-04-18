@@ -5,15 +5,22 @@ import { Container, Form, Header, Message } from 'semantic-ui-react';
 import { fetchType, GotPropertyDto, GotTypeDto } from '../../type';
 import { GotObjectProperty } from './got-object-property';
 
-
-export interface Props {
-    typeName: string;
-    type?: GotTypeDto;
-    fetchType: (typeName: string) => void;
-    level?: number;
-    error: Error;
+interface ReduxProps {
+    fetchType: typeof fetchType;
 }
-export interface State {
+
+interface PartialProps {
+    typeName?: string;
+    type?: GotTypeDto;
+    level?: number;
+    error?: Error;
+}
+
+interface Props extends PartialProps {
+    typeName: string;
+}
+
+interface State {
     value: string;
 }
 
@@ -21,7 +28,7 @@ export interface State {
  * Represents a create and edit form for an instance of a got type. It will render the
  * view automatically based on the properties of its type declaration.
  */
-class GotObject extends Component<Props, State> {
+class GotObject extends Component<Props & ReduxProps, State> {
 
     /**
      * The hierachy level of the object within the loaded object tree. Mainly used for
@@ -77,10 +84,10 @@ class GotObject extends Component<Props, State> {
     }
 }
 
-function mapStateToProps(state: any, props: any): Props {
-    const result: Props = { ...props as Props };
-    result.type = state.type.types[props.typeName];
-    return result;
+function mapStateToProps(state: any, props: Props): PartialProps {
+    return {
+        type: state.type.types[props.typeName]
+    };
 }
 
 export default connect(mapStateToProps, { fetchType })(GotObject);
