@@ -8,6 +8,7 @@ install:
   - yarn
   - pip install --user awscli
 script:
+  - yarn lint
   - yarn test
   - yarn build
 deploy:
