@@ -1,4 +1,4 @@
-import { GotTypeDto } from '../dto/got-type.dto';
+import { GotTypeDto } from '../dto/gotType.dto';
 
 export const FETCH_TYPE: string = 'TYPE.FECTH_TYPE';
 export const FETCH_ERROR: string = 'TYPE.FETCH_ERROR';

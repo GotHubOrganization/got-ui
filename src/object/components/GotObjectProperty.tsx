@@ -1,18 +1,18 @@
+import { Text } from 'leafs';
 import * as React from 'react';
 import { Component } from 'react';
-import { Text } from '../../leafs';
-import { GotPropertyDto, isPrimitive } from '../../type';
-import GotObject from './got-object';
+import { GotTypePropertyDto, isPrimitive } from 'type';
+import GotObject from './GotObject';
 
 namespace GotObjectProperty {
     export interface Props {
-        property: GotPropertyDto;
+        property: GotTypePropertyDto;
         level: number;
     }
 }
 
 /**
- * This component renders a single property based on the GotPropertyDto. Primitive properties
+ * This component renders a single property based on the GotTypePropertyDto. Primitive properties
  * are currently just rendered with a Text component while complex typed propterties will 
  * again render a new GotObject component which is attached to a GotTypeService by itself
  * (GotObjectTyped).

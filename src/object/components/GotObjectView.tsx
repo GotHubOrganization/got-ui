@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Component } from 'react';
 import { RouteComponentProps } from 'react-router';
-import { Map } from '../../type';
-import GotObject from './got-object';
+import { Map } from 'type';
+import GotObject from './GotObject';
 
 namespace GotObjectView {
     export interface Props extends RouteComponentProps<Map<string>> {

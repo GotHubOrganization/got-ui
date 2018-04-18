@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, Form, Header, Message } from 'semantic-ui-react';
-import { fetchType, GotPropertyDto, GotTypeDto } from '../../type';
-import { GotObjectProperty } from './got-object-property';
+import { fetchType, GotTypeDto, GotTypePropertyDto } from 'type';
+import { GotObjectProperty } from './GotObjectProperty';
 
 interface ReduxProps {
     fetchType: typeof fetchType;
@@ -41,7 +41,7 @@ class GotObject extends Component<Props & ReduxProps, State> {
      * @param {Object} type GotTypeDto which containes all properties to be rendered.
      */
     public renderProperties(type: GotTypeDto): Array<React.ReactElement<GotObjectProperty>> {
-        return type.properties.map((property: GotPropertyDto) => {
+        return type.properties.map((property: GotTypePropertyDto) => {
             return <GotObjectProperty
                 key={type.name + '_' + property.name}
                 property={property}
@@ -58,7 +58,7 @@ class GotObject extends Component<Props & ReduxProps, State> {
         const type: GotTypeDto =
             this.props.type ||
             {
-                properties: new Array<GotPropertyDto>(0),
+                properties: new Array<GotTypePropertyDto>(0),
                 name: ''
             };
         const loading: boolean = type.name ? false : true;
@@ -69,7 +69,8 @@ class GotObject extends Component<Props & ReduxProps, State> {
                 <Message
                     error
                     header={error.message}
-                    content={error.stack} />
+                    content={error.stack}
+                />
             );
         } else {
             return (

@@ -1,3 +1,3 @@
-import { objectRoutes } from './object';
+import { Routes as objectRoutes } from 'object';
 
-export const appRoutes = [objectRoutes];
+export const RootRoutes = [objectRoutes];

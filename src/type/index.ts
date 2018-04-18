@@ -1,5 +1,5 @@
-export { isPrimitive, Map } from './helpers/type-helper';
+export { isPrimitive, Map } from './helpers/typeHelper';
 export { default as TypeReducer } from './redux/reducer';
 export { fetchType } from './redux/actions';
-export { GotPropertyDto } from  './dto/got-property.dto';
-export { GotTypeDto } from './dto/got-type.dto';
+export { GotTypePropertyDto } from  './dto/gotTypeProperty.dto';
+export { GotTypeDto } from './dto/gotType.dto';

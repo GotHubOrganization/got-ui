@@ -1,18 +1,11 @@
-import { GotPropertyAccess } from './enums/got-property-access.enum';
+import { GotPropertyAccess } from './enums/gotPropertyAccess.enum';
 
-export class GotPropertyDto {
-
+export class GotTypePropertyDto {
     public readonly name: string;
-
     public type: string;
-
     public readonly view?: string;
-
     public readonly access: GotPropertyAccess;
-
     public readonly validators: any[];
-
     public readonly required: boolean;
-
 }
 

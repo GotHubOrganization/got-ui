@@ -1,5 +1,5 @@
-import { GotTypeService } from '../services/got-type-service';
-import { FETCH_ERROR, FETCH_TYPE, TypeActions } from './action-types';
+import { GotTypeService } from '../services/gotTypeService';
+import { FETCH_ERROR, FETCH_TYPE, TypeActions } from './actionTypes';
 
 /**
  * Fetches a type by its name and adds it to the application state

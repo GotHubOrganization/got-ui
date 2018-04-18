@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Container, Dropdown, Image, Menu } from 'semantic-ui-react';
 
-export const HeaderComponent = () => (
+export const Header = () => (
     <React.Fragment>
         <Menu fixed="top" inverted>
             <Container>

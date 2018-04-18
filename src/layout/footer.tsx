@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Container, Divider, Grid, Header, Image, List, Segment } from 'semantic-ui-react';
 
-export const FooterComponent = () => (
+export const Footer = () => (
     <Segment
         inverted
         vertical

@@ -1,6 +1,6 @@
-import { GotTypeDto } from '../dto/got-type.dto';
-import { Map } from '../helpers/type-helper';
-import { FETCH_ERROR, FETCH_TYPE, TypeActions } from './action-types';
+import { GotTypeDto } from '../dto/gotType.dto';
+import { Map } from '../helpers/typeHelper';
+import { FETCH_ERROR, FETCH_TYPE, TypeActions } from './actionTypes';
 
 export type TypeState = { error: Error | null, types: Map<GotTypeDto> };
 const initialState: TypeState = { error: null, types: {} };
