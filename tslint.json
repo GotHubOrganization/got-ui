@@ -20,6 +20,7 @@
         "no-namespace": false,
         "interface-name": false,
         "eofline": true,
+        "object-curly-spacing": [true, "always"],
         "quotemark": [
             true,
             "single",
