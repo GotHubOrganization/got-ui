@@ -1,1 +1,0 @@
-export { objectRoutes } from './routes';
