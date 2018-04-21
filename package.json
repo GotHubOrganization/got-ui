@@ -11,6 +11,7 @@
         "@types/redux-logger": "^3.0.5",
         "@types/redux-thunk": "^2.1.0",
         "axios": "^0.18.0",
+        "path-browser": "^2.2.1",
         "react": "^16.3.2",
         "react-dom": "^16.3.2",
         "react-redux": "^5.0.7",

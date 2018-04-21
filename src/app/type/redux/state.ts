@@ -7,7 +7,13 @@ import { GotTypeDto, Map } from 'app/type';
 export class State {
     /**
      * Collection of type declarations accessible by type name. For the type "Person" for
-     * example call `state.types.Person` or `state.types['Person']`.
+     * example call `state.types.Person` or `state.types['Person']`. Initial state is empty.
      */
-    public types: Map<GotTypeDto>;
+    public types: Map<GotTypeDto> = {};
+
+    /**
+     * Error object that might be set, when a type action causes an error. Action triggering
+     * components can render error messages.
+     */
+    public error: Error | null = null;
 }

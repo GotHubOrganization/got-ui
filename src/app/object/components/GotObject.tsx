@@ -3,7 +3,7 @@ import { fetchType, GotTypeDto, GotTypePropertyDto, Map } from 'app/type';
 import * as React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, Form, Header, Message } from 'semantic-ui-react';
+import { Form, Header, Message } from 'semantic-ui-react';
 import { GotObjectProperty } from './GotObjectProperty';
 
 interface ReduxProps {
@@ -125,10 +125,8 @@ class GotObject extends Component<Props & ReduxProps, State> {
         } else {
             return (
                 <Form as="div" loading={loading} style={{ minHeight: '10em' }}>
-                    <Container>
-                        <Header as={'h' + (this.level)} content={typeName} textAlign="left" />
-                        {this.renderProperties(type)}
-                    </Container>
+                    <Header as={'h' + (this.level)} content={typeName} textAlign="left" />
+                    {this.renderProperties(type)}
                 </Form>
             );
         }

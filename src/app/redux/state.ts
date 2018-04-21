@@ -1,3 +1,4 @@
+import { State as ObjectState } from 'app/object';
 import { State as TypeState } from 'app/type';
 
 /**
@@ -9,4 +10,9 @@ export class State {
      * State of the `app/type` submodule.
      */
     public type: TypeState;
+
+    /**
+     * TODO:
+     */
+    public object: ObjectState;
 }
