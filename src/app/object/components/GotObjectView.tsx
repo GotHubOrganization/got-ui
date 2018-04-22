@@ -1,5 +1,4 @@
 import { State as RootState } from 'app/redux';
-import { Map } from 'app/type';
 import * as path from 'path-browser';
 import * as React from 'react';
 import { Component } from 'react';
@@ -26,7 +25,7 @@ interface ReduxProps {
  * `Map<string>` is the type of the param object which means an object with string keys and
  * string values.
  */
-interface Props extends RouteComponentProps<Map<string>> {
+interface Props extends RouteComponentProps<{typeName:string; objectId: string}> {
 }
 
 interface State {
@@ -55,6 +54,7 @@ class GotObjectView extends Component<Props & ReduxProps, State> {
         };
         this.onChange = this.onChange.bind(this);
         this.onSave = this.onSave.bind(this);
+        this.navigateToObjectId = this.navigateToObjectId.bind(this);
     }
 
     public render() {
@@ -92,13 +92,11 @@ class GotObjectView extends Component<Props & ReduxProps, State> {
 
     private onSave() {
         const self = this;
-        this.props.saveObject(
-            {
-                type: this.state.typeName,
-                ...this.state.object
-            }
-        ).then((id) => {
-            self.props.history.push(path.join(self.props.match.url, id));
+        this.props.saveObject({
+            type: this.state.typeName,
+            ...this.state.object
+        }).then((id) => {
+            self.navigateToObjectId(id);
             self.setState({
                 ...self.state,
                 object: {
@@ -107,6 +105,16 @@ class GotObjectView extends Component<Props & ReduxProps, State> {
                 }
             });
         });
+    }
+
+    /**
+     * TODO:
+     */
+    private navigateToObjectId(id: string) {
+        const oldId = this.props.match.params.objectId;
+        if (oldId !== id) {
+            this.props.history.push(path.join(this.props.match.url, id));
+        }
     }
 }
 

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as path from 'path-browser';
+import { isNew } from '../helpers/objectHelpers';
 import { ObjectData } from '../interfaces/objectData.interface';
 // const API_ENDPOINT = 'https://api.gothub.io/types/object/';
 const API_ENDPOINT = 'http://localhost:8080/types/object/';
@@ -34,9 +35,16 @@ export class GotObjectService {
     public save(object: ObjectData): Promise<any> {
         return new Promise((resolve, reject) => {
             if (object.type) {
+                let saveObjectUrl: string = '';
+                if (isNew(object)) {
+                    saveObjectUrl = path.join(API_ENDPOINT, object.type);
+                } else {
+                    saveObjectUrl = path.join(API_ENDPOINT, object.type, object.id);
+                }
                 const data = { ...object };
                 delete data.type;
-                axios.post(path.join(API_ENDPOINT, object.type), data)
+                delete data.id;
+                axios.post(saveObjectUrl, data)
                     .then((response: any) => {
                         resolve(response.data.id);
                     })

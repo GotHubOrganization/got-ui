@@ -1,4 +1,3 @@
-import { isNew } from '../helpers/objectHelpers';
 import { ObjectData } from '../interfaces/objectData.interface';
 import { GotObjectService } from '../services/gotObjectService';
 import { ObjectActions, SAVE_OBJECT } from './actionTypes';
@@ -10,10 +9,6 @@ import { ObjectActions, SAVE_OBJECT } from './actionTypes';
  */
 export function saveObject(object: ObjectData) {
     return (dispatch: (action: ObjectActions) => void) => {
-        if (isNew(object)) {
-            delete object.id;
-        }
-
         const gotObjectService: GotObjectService = new GotObjectService();
         return gotObjectService.save(object).then((id: string) => {
             dispatch({
