@@ -1,6 +1,6 @@
-import { GotObjectDto } from '../dto/gotObject.dto';
+import { ObjectData } from '../interfaces/objectData.interface';
 
-export const isNew = (object: GotObjectDto) => {
+export const isNew = (object: ObjectData) => {
     return !object.id || object.id.startsWith('new');
 };
 

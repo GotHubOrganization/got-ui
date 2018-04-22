@@ -6,7 +6,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { Button, Grid } from 'semantic-ui-react';
-import { GotObjectDto } from '../dto/gotObject.dto';
+import { ObjectData } from '../interfaces/objectData.interface';
 import { saveObject } from '../redux/actions';
 import GotObject from './GotObject';
 
@@ -14,7 +14,7 @@ interface ReduxProps {
     /**
      * TODO:
      */
-    saveObject: typeof saveObject;
+    saveObject: (object: ObjectData) => Promise<string>;
 }
 
 /**
@@ -30,10 +30,15 @@ interface Props extends RouteComponentProps<Map<string>> {
 }
 
 interface State {
+
     /**
      * TODO:
      */
-    object: GotObjectDto | any;
+    typeName: string;
+    /**
+     * TODO:
+     */
+    object: ObjectData | any;
 }
 
 /**
@@ -45,6 +50,7 @@ class GotObjectView extends Component<Props & ReduxProps, State> {
     constructor(props: Props & ReduxProps) {
         super(props);
         this.state = {
+            typeName: this.props.match.params.typeName,
             object: {}
         };
         this.onChange = this.onChange.bind(this);
@@ -52,7 +58,7 @@ class GotObjectView extends Component<Props & ReduxProps, State> {
     }
 
     public render() {
-        const typeName = this.props.match.params.typeName;
+        const typeName = this.state.typeName;
         return (
             <React.Fragment>
                 <Grid>
@@ -85,9 +91,22 @@ class GotObjectView extends Component<Props & ReduxProps, State> {
     }
 
     private onSave() {
-        this.props.saveObject(this.state.object);
-        this.props.history.push(path.join(this.props.match.url, this.state.object.id));
-        console.log(this.state.object.id);
+        const self = this;
+        this.props.saveObject(
+            {
+                type: this.state.typeName,
+                ...this.state.object
+            }
+        ).then((id) => {
+            self.props.history.push(path.join(self.props.match.url, id));
+            self.setState({
+                ...self.state,
+                object: {
+                    id,
+                    ...self.state.object
+                }
+            });
+        });
     }
 }
 
