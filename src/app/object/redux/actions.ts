@@ -1,11 +1,10 @@
 import { ObjectData } from '../interfaces/objectData.interface';
 import { GotObjectService } from '../services/gotObjectService';
-import { ObjectActions, SAVE_OBJECT } from './actionTypes';
+import { FETCH_OBJECT, ObjectActions, SAVE_OBJECT } from './actionTypes';
 
 /**
  * TODO: 
- * @param object 
- * @param setId 
+ * @param object
  */
 export function saveObject(object: ObjectData) {
     return (dispatch: (action: ObjectActions) => void) => {
@@ -16,6 +15,23 @@ export function saveObject(object: ObjectData) {
                 payload: { id, ...object }
             });
             return id;
+        });
+    };
+}
+
+/**
+ * TODO: 
+ * @param object
+ */
+export function fetchObject(id: string) {
+    return (dispatch: (action: ObjectActions) => void) => {
+        const gotObjectService: GotObjectService = new GotObjectService();
+        return gotObjectService.get(id).then((object: ObjectData) => {
+            dispatch({
+                type: FETCH_OBJECT,
+                payload: { ...object }
+            });
+            return object;
         });
     };
 }

@@ -4,7 +4,11 @@ import * as React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, Header, Message } from 'semantic-ui-react';
+import { ObjectData } from '../interfaces/objectData.interface';
 import { GotObjectProperty } from './GotObjectProperty';
+/**
+ * TODO: Refactoring
+ */
 
 interface ReduxProps {
     /**
@@ -31,6 +35,11 @@ interface PartialProps {
     type?: GotTypeDto;
 
     /**
+     * TODO:
+     */
+    object?: ObjectData;
+
+    /**
      * Represents the level in the component tree for rendering purposes.
      */
     level?: number;
@@ -41,6 +50,9 @@ interface PartialProps {
      */
     error?: Error;
 
+    /**
+     * TODO:
+     */
     onChange?: (value: any) => void;
 }
 
@@ -49,6 +61,9 @@ interface Props extends PartialProps {
 }
 
 interface State {
+    /**
+     * TODO:
+     */
     object: any;
 }
 
@@ -90,10 +105,15 @@ class GotObject extends Component<Props & ReduxProps, State> {
      * @param {Object} type GotTypeDto which containes all properties to be rendered.
      */
     public renderProperties(type: GotTypeDto): Array<React.ReactElement<GotObjectProperty>> {
+        let value: any;
         return type.properties.map((property: GotTypePropertyDto) => {
+            if (this.state.object) {
+                value = this.state.object[property.name]
+            }
             return <GotObjectProperty
                 key={type.name + '_' + property.name}
                 property={property}
+                value={value}
                 level={this.level}
                 onChange={this.onChange} />;
         });
@@ -104,6 +124,7 @@ class GotObject extends Component<Props & ReduxProps, State> {
     }
 
     public render() {
+        this.state = { object: this.props.object } || {};
         const { typeName } = this.props;
         const type: GotTypeDto =
             this.props.type ||

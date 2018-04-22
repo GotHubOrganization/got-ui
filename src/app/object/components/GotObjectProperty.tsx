@@ -4,11 +4,20 @@ import * as React from 'react';
 import { Component } from 'react';
 import GotObject from './GotObject';
 
+/**
+ * TODO: Refactoring
+ */
+
 interface Props {
     /**
      * Represents the description of a type property in the got environment.
      */
     property: GotTypePropertyDto;
+
+    /**
+     * TODO:
+     */
+    value?: any;
 
     /**
      * Represents the level in the component tree for rendering purposes.
@@ -44,9 +53,9 @@ export class GotObjectProperty extends Component<Props> {
         const type = property.type;
         const level = this.props.level || 1;
         if (isPrimitive(type)) {
-            return <Text label={property.name} onChange={this.onChange} />;
+            return <Text label={property.name} value={this.props.value} onChange={this.onChange} />;
         } else {
-            return <GotObject typeName={type} level={level + 1} onChange={this.onChange} />;
+            return <GotObject typeName={type} object={this.props.value} level={level + 1} onChange={this.onChange} />;
         }
     }
 }

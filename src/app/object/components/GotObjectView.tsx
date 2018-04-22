@@ -6,14 +6,23 @@ import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { Button, Grid } from 'semantic-ui-react';
 import { ObjectData } from '../interfaces/objectData.interface';
-import { saveObject } from '../redux/actions';
+import { fetchObject, saveObject } from '../redux/actions';
 import GotObject from './GotObject';
+
+/**
+ * TODO: Refactoring
+ */
 
 interface ReduxProps {
     /**
      * TODO:
      */
     saveObject: (object: ObjectData) => Promise<string>;
+
+    /**
+     * TODO:
+     */
+    fetchObject: (id: string) => Promise<object>;
 }
 
 /**
@@ -25,7 +34,7 @@ interface ReduxProps {
  * `Map<string>` is the type of the param object which means an object with string keys and
  * string values.
  */
-interface Props extends RouteComponentProps<{typeName:string; objectId: string}> {
+interface Props extends RouteComponentProps<{ typeName: string; objectId: string }> {
 }
 
 interface State {
@@ -57,6 +66,16 @@ class GotObjectView extends Component<Props & ReduxProps, State> {
         this.navigateToObjectId = this.navigateToObjectId.bind(this);
     }
 
+    public componentWillMount() {
+        const self = this;
+        const objectId = this.props.match.params.objectId;
+        if (objectId) {
+            this.props.fetchObject(objectId).then((object: ObjectData) => {
+                self.setState({object});
+            });
+        }
+    }
+
     public render() {
         const typeName = this.state.typeName;
         return (
@@ -64,7 +83,7 @@ class GotObjectView extends Component<Props & ReduxProps, State> {
                 <Grid>
                     <Grid.Row columns={1}>
                         <Grid.Column>
-                            <GotObject typeName={typeName} onChange={this.onChange} />
+                            <GotObject typeName={typeName} object={this.state.object} onChange={this.onChange} />
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row columns={3}>
@@ -122,4 +141,4 @@ function mapStateToProps(state: RootState, props: Props): any {
     return {};
 }
 
-export default connect(mapStateToProps, { saveObject })(GotObjectView);
+export default connect(mapStateToProps, { fetchObject, saveObject })(GotObjectView);
