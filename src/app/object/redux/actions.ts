@@ -3,8 +3,8 @@ import { GotObjectService } from '../services/gotObjectService';
 import { FETCH_OBJECT, ObjectActions, SAVE_OBJECT } from './actionTypes';
 
 /**
- * TODO: 
- * @param object
+ * Action creator for dispatching the saveObject action. It depends on the GotObjectService
+ * which posts the object to the API.
  */
 export function saveObject(object: ObjectData) {
     return (dispatch: (action: ObjectActions) => void) => {
@@ -20,8 +20,8 @@ export function saveObject(object: ObjectData) {
 }
 
 /**
- * TODO: 
- * @param object
+ * Action creator for dispatching the fetchObject action. It depends on the GotObjectService
+ * which gets the object from the API.
  */
 export function fetchObject(id: string) {
     return (dispatch: (action: ObjectActions) => void) => {

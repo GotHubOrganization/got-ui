@@ -12,7 +12,7 @@ export class State {
     public type: TypeState;
 
     /**
-     * TODO:
+     * State of the `app/object` submodule.
      */
     public object: ObjectState;
 }

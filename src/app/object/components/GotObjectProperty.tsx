@@ -4,10 +4,6 @@ import * as React from 'react';
 import { Component } from 'react';
 import GotObject from './GotObject';
 
-/**
- * TODO: Refactoring
- */
-
 interface Props {
     /**
      * Represents the description of a type property in the got environment.
@@ -15,7 +11,8 @@ interface Props {
     property: GotTypePropertyDto;
 
     /**
-     * TODO:
+     * Holds the value of the property. This can either be a primitive value or a nested
+     * object.
      */
     value?: any;
 

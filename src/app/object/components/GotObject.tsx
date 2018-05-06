@@ -6,9 +6,6 @@ import { connect } from 'react-redux';
 import { Form, Header, Message } from 'semantic-ui-react';
 import { ObjectData } from '../interfaces/objectData.interface';
 import { GotObjectProperty } from './GotObjectProperty';
-/**
- * TODO: Refactoring
- */
 
 interface ReduxProps {
     /**
@@ -35,7 +32,7 @@ interface PartialProps {
     type?: GotTypeDto;
 
     /**
-     * TODO:
+     * The object value tree, that should be filled in the fields of this got object and its subobjects.
      */
     object?: ObjectData;
 
@@ -51,7 +48,8 @@ interface PartialProps {
     error?: Error;
 
     /**
-     * TODO:
+     * Parent components can subscribe to this method to get a signal on every change of this got object
+     * and its subobjects.
      */
     onChange?: (value: any) => void;
 }
@@ -60,18 +58,11 @@ interface Props extends PartialProps {
     typeName: string;
 }
 
-interface State {
-    /**
-     * TODO:
-     */
-    object: any;
-}
-
 /**
  * Represents a create and edit form for an instance of a got type. It will render the
  * view automatically based on the properties of its type declaration.
  */
-class GotObject extends Component<Props & ReduxProps, State> {
+class GotObject extends Component<Props & ReduxProps> {
 
     /**
      * The hierachy level of the object within the loaded object tree. Mainly used for
@@ -87,17 +78,13 @@ class GotObject extends Component<Props & ReduxProps, State> {
         this.onChange = this.onChange.bind(this);
     }
 
-    public onChange(propVal: Map<any>) {
-        const newState: State = {
-            object: {
-                ...this.state.object,
-                ...propVal
-            }
-        }
+    public onChange(objectDiff: Map<any>) {
         if (this.props.onChange) {
-            this.props.onChange(newState.object);
+            this.props.onChange({
+                ...this.props.object,
+                ...objectDiff
+            });
         }
-        this.setState(newState);
     }
 
     /**
@@ -107,8 +94,8 @@ class GotObject extends Component<Props & ReduxProps, State> {
     public renderProperties(type: GotTypeDto): Array<React.ReactElement<GotObjectProperty>> {
         let value: any;
         return type.properties.map((property: GotTypePropertyDto) => {
-            if (this.state.object) {
-                value = this.state.object[property.name]
+            if (this.props.object) {
+                value = this.props.object[property.name]
             }
             return <GotObjectProperty
                 key={type.name + '_' + property.name}
@@ -124,7 +111,6 @@ class GotObject extends Component<Props & ReduxProps, State> {
     }
 
     public render() {
-        this.state = { object: this.props.object } || {};
         const { typeName } = this.props;
         const type: GotTypeDto =
             this.props.type ||
@@ -146,7 +132,7 @@ class GotObject extends Component<Props & ReduxProps, State> {
         } else {
             return (
                 <Form as="div" loading={loading} style={{ minHeight: '10em' }}>
-                    <Header as={'h' + (this.level)} content={typeName} textAlign="left" />
+                    <Header as="h3" color="grey" size="tiny" content={typeName} textAlign="left" />
                     {this.renderProperties(type)}
                 </Form>
             );

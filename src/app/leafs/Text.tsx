@@ -19,7 +19,7 @@ interface State {
 export class Text extends Component<Props, State> {
     constructor(props: Props) {
         super(props);
-        this.state = { value: this.props.value};
+        this.state = { value: this.props.value || '' };
         this.onChange = this.onChange.bind(this);
     }
 

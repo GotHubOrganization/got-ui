@@ -10,17 +10,16 @@ import { fetchObject, saveObject } from '../redux/actions';
 import GotObject from './GotObject';
 
 /**
- * TODO: Refactoring
+ * This interface groups together redux related properties
  */
-
 interface ReduxProps {
     /**
-     * TODO:
+     * Action trigger to save a certain got object.
      */
     saveObject: (object: ObjectData) => Promise<string>;
 
     /**
-     * TODO:
+     * Action trigger to fetch a certain got object.
      */
     fetchObject: (id: string) => Promise<object>;
 }
@@ -40,11 +39,8 @@ interface Props extends RouteComponentProps<{ typeName: string; objectId: string
 interface State {
 
     /**
-     * TODO:
-     */
-    typeName: string;
-    /**
-     * TODO:
+     * The current unsaved object in the state. When the save button is clicked, the view state
+     * will be synced to the store and the API.
      */
     object: ObjectData | any;
 }
@@ -58,7 +54,6 @@ class GotObjectView extends Component<Props & ReduxProps, State> {
     constructor(props: Props & ReduxProps) {
         super(props);
         this.state = {
-            typeName: this.props.match.params.typeName,
             object: {}
         };
         this.onChange = this.onChange.bind(this);
@@ -77,7 +72,7 @@ class GotObjectView extends Component<Props & ReduxProps, State> {
     }
 
     public render() {
-        const typeName = this.state.typeName;
+        const typeName = this.props.match.params.typeName;
         return (
             <React.Fragment>
                 <Grid>
@@ -103,16 +98,23 @@ class GotObjectView extends Component<Props & ReduxProps, State> {
         );
     }
 
+    /**
+     * Change listener for the got object in the state. Listens to all changes of the object and
+     * nested objects and writes the to the component state.
+     */
     private onChange(value: any) {
         this.setState({
             object: value
         });
     }
 
+    /**
+     * Event listener for the save event. Writes the component state to the redux store
+     */
     private onSave() {
         const self = this;
         this.props.saveObject({
-            type: this.state.typeName,
+            type: this.props.match.params.typeName,
             ...this.state.object
         }).then((id) => {
             self.navigateToObjectId(id);
@@ -127,7 +129,8 @@ class GotObjectView extends Component<Props & ReduxProps, State> {
     }
 
     /**
-     * TODO:
+     * Navigates the router to the object id to indicate when a new object (without id)
+     * has been saved.
      */
     private navigateToObjectId(id: string) {
         const oldId = this.props.match.params.objectId;
