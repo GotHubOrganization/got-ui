@@ -1,4 +1,5 @@
-import { GotTypeDto, Map } from 'app/type';
+import { State as ObjectState } from 'app/object';
+import { State as TypeState } from 'app/type';
 
 /**
  * Root state of the application it groups together the states of the
@@ -8,5 +9,10 @@ export class State {
     /**
      * State of the `app/type` submodule.
      */
-    public type: Map<GotTypeDto>
+    public type: TypeState;
+
+    /**
+     * State of the `app/object` submodule.
+     */
+    public object: ObjectState;
 }

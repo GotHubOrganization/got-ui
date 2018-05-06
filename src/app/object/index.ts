@@ -5,3 +5,5 @@
  */
 
 export { Routes } from './Routes';
+export { State } from './redux/state';
+export { default as ObjectReducer } from './redux/reducer';

@@ -15,6 +15,7 @@
         "object-literal-sort-keys": false,
         "interface-over-type-literal": false,
         "jsx-boolean-value": false,
+        "no-string-literal": false,
         "jsx-closing-bracket-location": true,
         "jsx-closing-tag-location": true,
         "no-namespace": false,

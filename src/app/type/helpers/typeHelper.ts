@@ -1,5 +1,5 @@
 /**
- * TODO: 
+ * This types describes objects with many string keys that contain objects of type T.
  */
 export type Map<T> = { [key: string]: T };
 

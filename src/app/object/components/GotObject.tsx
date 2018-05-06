@@ -1,9 +1,10 @@
 import { State as RootState } from 'app/redux/state';
-import { fetchType, GotTypeDto, GotTypePropertyDto } from 'app/type';
+import { fetchType, GotTypeDto, GotTypePropertyDto, Map } from 'app/type';
 import * as React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, Form, Header, Message } from 'semantic-ui-react';
+import { Form, Header, Message } from 'semantic-ui-react';
+import { ObjectData } from '../interfaces/objectData.interface';
 import { GotObjectProperty } from './GotObjectProperty';
 
 interface ReduxProps {
@@ -31,6 +32,11 @@ interface PartialProps {
     type?: GotTypeDto;
 
     /**
+     * The object value tree, that should be filled in the fields of this got object and its subobjects.
+     */
+    object?: ObjectData;
+
+    /**
      * Represents the level in the component tree for rendering purposes.
      */
     level?: number;
@@ -40,6 +46,12 @@ interface PartialProps {
      * to the user or generally influence the rendering of the component.
      */
     error?: Error;
+
+    /**
+     * Parent components can subscribe to this method to get a signal on every change of this got object
+     * and its subobjects.
+     */
+    onChange?: (value: any) => void;
 }
 
 interface Props extends PartialProps {
@@ -58,16 +70,43 @@ class GotObject extends Component<Props & ReduxProps> {
      */
     public level: number = this.props.level || 1;
 
+    constructor(props: Props & ReduxProps) {
+        super(props);
+        this.state = {
+            object: {}
+        };
+        this.onChange = this.onChange.bind(this);
+    }
+
+    /**
+     * Change listener which recieves an object with one property and merges it into the current got object
+     * in the props. This allows recursively synced deeply nested objects.
+     */
+    public onChange(objectDiff: Map<any>) {
+        if (this.props.onChange) {
+            this.props.onChange({
+                ...this.props.object,
+                ...objectDiff
+            });
+        }
+    }
+
     /**
      * Renders all properties of the given type declaration.
      * @param {Object} type GotTypeDto which containes all properties to be rendered.
      */
     public renderProperties(type: GotTypeDto): Array<React.ReactElement<GotObjectProperty>> {
+        let value: any;
         return type.properties.map((property: GotTypePropertyDto) => {
+            if (this.props.object) {
+                value = this.props.object[property.name]
+            }
             return <GotObjectProperty
                 key={type.name + '_' + property.name}
                 property={property}
-                level={this.level} />;
+                value={value}
+                level={this.level}
+                onChange={this.onChange} />;
         });
     }
 
@@ -97,10 +136,8 @@ class GotObject extends Component<Props & ReduxProps> {
         } else {
             return (
                 <Form as="div" loading={loading} style={{ minHeight: '10em' }}>
-                    <Container>
-                        <Header as={'h' + (this.level)} content={typeName} textAlign="left" />
-                        {this.renderProperties(type)}
-                    </Container>
+                    <Header as="h3" color="grey" size="tiny" content={typeName} textAlign="left" />
+                    {this.renderProperties(type)}
                 </Form>
             );
         }

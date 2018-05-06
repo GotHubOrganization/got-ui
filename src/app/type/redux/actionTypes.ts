@@ -1,5 +1,10 @@
 import { GotTypeDto } from '../dto/gotType.dto';
 
+/**
+ * TODO: better action typing see:
+ * https://medium.com/@martin_hotell/redux-typescript-typed-actions-with-less-keystrokes-d984063901d
+ */
+
 export const FETCH_TYPE: string = 'TYPE.FECTH_TYPE';
 export const FETCH_ERROR: string = 'TYPE.FETCH_ERROR';
 
