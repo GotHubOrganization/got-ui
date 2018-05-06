@@ -78,6 +78,10 @@ class GotObject extends Component<Props & ReduxProps> {
         this.onChange = this.onChange.bind(this);
     }
 
+    /**
+     * Change listener which recieves an object with one property and merges it into the current got object
+     * in the props. This allows recursively synced deeply nested objects.
+     */
     public onChange(objectDiff: Map<any>) {
         if (this.props.onChange) {
             this.props.onChange({

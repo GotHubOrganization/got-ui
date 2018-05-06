@@ -3,12 +3,26 @@ import { Component } from 'react';
 import { Form } from 'semantic-ui-react';
 
 interface Props {
+    /**
+     * Displayed label of the property input control.
+     */
     label: string;
+
+    /**
+     * Filled in value of the property input control.
+     */
     value?: string;
+
+    /**
+     * Change trigger where the parent component can subscribe to.
+     */
     onChange?: (value: string) => void;
 }
 
 interface State {
+    /**
+     * Controlled value by the input control.
+     */
     value?: string;
 }
 
@@ -23,6 +37,10 @@ export class Text extends Component<Props, State> {
         this.onChange = this.onChange.bind(this);
     }
 
+    /**
+     * Change listener of the input controls change event. It signals the value to the
+     * parent component.
+     */
     public onChange(event: React.ChangeEvent<HTMLInputElement>) {
         const value = event.target.value;
         this.setState({value});
